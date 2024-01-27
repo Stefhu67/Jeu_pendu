@@ -129,13 +129,16 @@ def generer_enigme_pendu(mot):
     liste_index_correspondant = trouver_index_correspondants(mot, lettre_aleatoire)
 
     # Retourner l'énigme avec une lettre aléatoire
-    return changer_lettre(enigme_pendu, lettre_aleatoire, liste_index_correspondant)
+    return changer_lettre(enigme_pendu, lettre_aleatoire, liste_index_correspondant), lettre_aleatoire
 
 
 # Jouer au pendu avec une énigme d'un mot et un nombre de chances
-def jouer_au_pendu(enigme, mot, nombre_chance=6, chance=0):
+def jouer_au_pendu(enigme, mot, lettre, nombre_chance=6, chance=0):
     # Les choix possibles pour le mot
     reponses_possibles = string.ascii_lowercase
+
+    # Enlever la lettre existante dans l'énigme dans les choix possibles
+    reponses_possibles = reponses_possibles.replace(lettre, '')
 
     print(f"Voici les choix possibles en minuscules: {reponses_possibles}")
     print("Voici l'énigme: ")
@@ -236,10 +239,10 @@ while lancer_le_jeu == 1:
     mot_aleatoire = choisir_item_aleatoire(liste_mots_fichier)
 
     # Génération de l'énigme du pendu à partir du mot aléatoire
-    mot_pendu = generer_enigme_pendu(mot_aleatoire)
+    mot_pendu, lettre_donnee = generer_enigme_pendu(mot_aleatoire)
 
     # Jouer au pendu avec l'énigme et le mot aléatoire
-    jouer_au_pendu(mot_pendu, mot_aleatoire)
+    jouer_au_pendu(mot_pendu, mot_aleatoire, lettre_donnee)
 
     # Relancer le jeu si l'utilisateur le souhaite
     lancer_le_jeu = int(input('Voulez-vous rejouer? Oui: Appuyer sur "1" puis "Entrer", sinon "2" puis "Enter": \n'))
