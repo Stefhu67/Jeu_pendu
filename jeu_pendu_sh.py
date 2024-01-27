@@ -234,7 +234,6 @@ lancer_le_jeu = 1
 while lancer_le_jeu == 1:
     # Choisir un mot aléatoire dans la liste de mots
     mot_aleatoire = choisir_item_aleatoire(liste_mots_fichier)
-    print(mot_aleatoire)
 
     # Génération de l'énigme du pendu à partir du mot aléatoire
     mot_pendu = generer_enigme_pendu(mot_aleatoire)
